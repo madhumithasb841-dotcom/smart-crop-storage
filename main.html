@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Smart Hermetic Crop Storage — Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<style>
+  :root {
+    --accent: #247A2F;
+    --accent-light: #2fa85f;
+    --muted: #666;
+    --card: #fff;
+    --bg: #f4f7f6;
+  }
+
+  body {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    margin: 0;
+    background: var(--bg);
+    color: #222;
+  }
+
+  header {
+    background: var(--accent);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+
+  header .small {
+    font-size: 14px;
+    margin-top: 4px;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 0 16px;
+  }
+
+  .card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .col {
+    flex: 1 1 320px;
+    min-width: 280px;
+  }
+
+  iframe, img {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    height: 420px;
+  }
+
+  .dashboard .stat {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: #333;
+    background: linear-gradient(90deg, #e8f5e9, #f0fff4);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  button {
+    padding: 10px 18px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+
+  button:hover {
+    background: var(--accent-light);
+  }
+
+  footer {
+    padding: 16px 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .small { font-size: 13px; color: var(--muted); }
+
+  @media (max-width:720px) {
+    iframe, img { height: 320px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Smart Hermetic Crop Storage — Project Demo</h1>
+  <div class="small">CBM348 — Foundation Skills in Integrated Product Development</div>
+</header>
+
+<main class="container">
+  <section class="card">
+    <h2>About</h2>
+    <p class="small">This demo shows the Wokwi circuit simulation (DHT sensor + LED simulation) and the KiCad 3D PCB visualization for the Smart Hermetic Crop Storage Device. Use the panels below to explore the live simulation and 3D model.</p>
+  </section>
+
+  <div class="row">
+    <div class="col card">
+      <h3>Live Circuit (Wokwi)</h3>
+      <iframe src="https://wokwi.com/projects/445851366770872321" title="Wokwi Circuit" allowfullscreen></iframe>
+      <p class="small">Press "Start Simulation" inside the embedded Wokwi frame to run the circuit. Adjust sensor sliders to test LED alerts.</p>
+    </div>
+
+    <div class="col card">
+      <h3>3D PCB (KiCad)</h3>
+      <img src="D:\crop_stroage_monitoring.jpg" alt="KiCad PCB 3D View">
+      <p class="small">Screenshot of the 3D PCB view from KiCad. Shows component layout and design.</p>
+    </div>
+  </div>
+   <div class="col card">
+      <h3>3D PCB (KiCad)</h3>
+      <img src="C:\Users\thozh\OneDrive\Pictures\Screenshots\crop_stroage_monitoring.png" alt="KiCad PCB 3D View">
+      <p class="small">Screenshot of the 3D PCB view from KiCad. Shows component layout and design.</p>
+    </div>
+  </div>
+  <div class="col card">
+      <h3>3D PCB (KiCad)</h3>
+      <img src="C:\Users\thozh\OneDrive\Pictures\crop_stroage_monitoring.png" alt="KiCad PCB 3D View">
+      <p class="small">Screenshot of the 3D PCB view from KiCad. Shows component layout and design.</p>
+    </div>
+  </div>
+  
+
+  <section class="card dashboard">
+    <h3>Demo Dashboard (Simulated)</h3>
+    <div id="stats">
+      <div class="stat"><div>Temperature</div><div id="temp">-- °C</div></div>
+      <div class="stat"><div>Humidity</div><div id="hum">-- %</div></div>
+      <div class="stat"><div>Storage Status</div><div id="status">--</div></div>
+    </div>
+    <p class="small">This dashboard shows simulated sensor data. Later, it can be connected to IoT platforms like ThingSpeak or Firebase.</p>
+    <div style="margin-top:12px;">
+      <button id="simulateBtn">Simulate Readings</button>
+      <button id="stopBtn" style="margin-left:8px;">Stop</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="small">Developed by Team — Smart Crop Storage | Demo using Wokwi & KiCad</div>
+</footer>
+
+<script>
+  // Dashboard Simulation
+  let simInterval = null;
+  const tempEl = document.getElementById('temp');
+  const humEl = document.getElementById('hum');
+  const statusEl = document.getElementById('status');
+
+  function updateStats() {
+    const t = (20 + Math.random()*20).toFixed(1);
+    const h = Math.floor(40 + Math.random()*60);
+    tempEl.textContent = t + ' °C';
+    humEl.textContent = h + ' %';
+
+    if (t > 30 || h > 80) {
+      statusEl.textContent = 'ALERT — Action Required';
+      statusEl.style.color = 'crimson';
+    } else {
+      statusEl.textContent = 'SAFE';
+      statusEl.style.color = '#228B22';
+    }
+  }
+
+  document.getElementById('simulateBtn').onclick = () => {
+    if (!simInterval) { updateStats(); simInterval = setInterval(updateStats, 2000); }
+  };
+  document.getElementById('stopBtn').onclick = () => { clearInterval(simInterval); simInterval = null; };
+</script>
+
+</body>
+</html>
